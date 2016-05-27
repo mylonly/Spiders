@@ -60,11 +60,10 @@ class sexInSexSpider(CrawlSpider):
     def after_login(self,response):
         self.log(response.meta['cookiejar'])
         for url in self.start_urls:
-            yield Request(url,meta={'cookiejar':response.meta['cookiejar']},dont_filter = True)
+            yield Request(url,headers = self.headers,meta={'cookiejar':response.meta['cookiejar']},dont_filter = True)
             
     def parse_forum(self,response):
         self.log("find a forum")
-        open_in_browser(response)
         
     def parse_thread(self,response):
         self.log("find a thread")
