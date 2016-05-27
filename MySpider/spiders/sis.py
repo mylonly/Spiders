@@ -1,3 +1,4 @@
+#coding: utf-8
 import urllib2
 import os
 import re
@@ -7,7 +8,7 @@ import codecs
 from scrapy.contrib.spiders import CrawlSpider,Rule
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import Selector
-from MySpider.items import girlItem
+from MySpider.items import sisItem
 from scrapy.http import Request
 from scrapy.http import FormRequest
 from scrapy.utils.response import open_in_browser
@@ -15,14 +16,14 @@ from scrapy.utils.response import open_in_browser
 
 
 
-class sexInSexSpider(CrawlSpider):
-    name="sexinsex"
+class sisSpider(CrawlSpider):
+    name="sis"
     allowed_domains=["sexinsex.net"]
     start_urls=["http://sexinsex.net/bbs/forum-186-1.html"]
     cookie = ""
     rules = (
-        Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),process_request='request_link'),
-        Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-1.html')),callback='parse_thread',process_request='request_link',follow=False),
+        Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),process_request='request_link',follow=True),
+        Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-1.html')),process_request='request_thread',callback='parse_thread'),
     )
     
     headers = {
@@ -67,6 +68,25 @@ class sexInSexSpider(CrawlSpider):
     def request_link(self,request):
         self.log("find a link %s"%request.url)
         return Request(request.url,headers = self.headers,meta={'cookiejar':self.cookie},dont_filter=True)
+    
+    def request_thread(self,request):
+        self.log("find a thread link %s"%request.url)
+        return Request(request.url,headers = self.headers,meta={'cookiejar':self.cookie},callback=self.parse_thread,dont_filter=True)
 
     def parse_thread(self,response):
         self.log("find a thread")
+        sel = Selector(response)
+        title = ""
+        titles = sel.xpath("//form[@name='modactions']//div[@class='mainbox viewthread']//h1/text()").extract()
+        for txt in titles:
+            title = txt
+            break
+        self.log(title)
+        item = sisItem()
+        item['albumTitle'] = title
+        imageUrls = []
+        urls = sel.xpath("//div[contains(@id,'postmessage')]//img[contains(@src,'http')]/@src").extract()
+        for url in urls:
+            imageUrls.append(url)
+        item['imageUrls'] = imageUrls
+        return item

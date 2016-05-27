@@ -16,4 +16,7 @@ class MyspiderItem(scrapy.Item):
 class girlItem(scrapy.Item):
     altInfo = scrapy.Field()
     imgSrc = scrapy.Field()
-    
+
+class sisItem(scrapy.Item):
+    albumTitle = scrapy.Field()
+    imageUrls = scrapy.Field()

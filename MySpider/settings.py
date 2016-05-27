@@ -65,9 +65,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'MySpider.pipelines.MyspiderPipeline': 300,
-}
+# ITEM_PIPELINES = {
+#     'MySpider.pipelines.MyspiderPipeline': 300,
+# }
 
 #禁止重定向
 REDIRECT_ENABLED = False
@@ -92,3 +92,6 @@ REDIRECT_ENABLED = False
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+FEED_URI = 'file:///Users/Apple/Mylonly/MySpider/sis.json'
+FEED_FORMAT = 'json'
