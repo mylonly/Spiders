@@ -21,8 +21,8 @@ class sexInSexSpider(CrawlSpider):
     start_urls=["http://sexinsex.net/bbs/forum-186-1.html"]
     cookie = ""
     rules = (
-        Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),callback='parse_forum',follow=True),
-        Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-1.html')),callback='parse_thread',follow=False),
+        Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),process_request='request_link'),
+        Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-1.html')),callback='parse_thread',process_request='request_link',follow=False),
     )
     
     headers = {
@@ -43,6 +43,7 @@ class sexInSexSpider(CrawlSpider):
         formhash = Selector(response).xpath('//form//input[@name="formhash"]/@value').extract()[0]
         self.log(formhash)
         self.cookie = response.meta['cookiejar']
+        self.log(self.cookie)
         return [FormRequest.from_response(response,meta={'cookiejar':response.meta['cookiejar']},
                                           headers = self.headers,
                                           formdata = {
@@ -62,8 +63,10 @@ class sexInSexSpider(CrawlSpider):
         for url in self.start_urls:
             yield Request(url,headers = self.headers,meta={'cookiejar':self.cookie},dont_filter = True)
             
-    def parse_forum(self,response):
-        self.log("find a forum")
-        
+    
+    def request_link(self,request):
+        self.log("find a link %s"%request.url)
+        return Request(request.url,headers = self.headers,meta={'cookiejar':self.cookie},dont_filter=True)
+
     def parse_thread(self,response):
         self.log("find a thread")
