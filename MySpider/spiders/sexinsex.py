@@ -19,7 +19,7 @@ class sexInSexSpider(CrawlSpider):
     name="sexinsex"
     allowed_domains=["sexinsex.net"]
     start_urls=["http://sexinsex.net/bbs/forum-186-1.html"]
-    
+    cookie = ""
     rules = (
         Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),callback='parse_forum',follow=True),
         Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-1.html')),callback='parse_thread',follow=False),
@@ -42,6 +42,7 @@ class sexInSexSpider(CrawlSpider):
         self.log("preparing login...")
         formhash = Selector(response).xpath('//form//input[@name="formhash"]/@value').extract()[0]
         self.log(formhash)
+        self.cookie = response.meta['cookiejar']
         return [FormRequest.from_response(response,meta={'cookiejar':response.meta['cookiejar']},
                                           headers = self.headers,
                                           formdata = {
@@ -58,9 +59,8 @@ class sexInSexSpider(CrawlSpider):
                                           dont_filter = True)]
                                                       
     def after_login(self,response):
-        self.log(response.meta['cookiejar'])
         for url in self.start_urls:
-            yield Request(url,headers = self.headers,meta={'cookiejar':response.meta['cookiejar']},dont_filter = True)
+            yield Request(url,headers = self.headers,meta={'cookiejar':self.cookie},dont_filter = True)
             
     def parse_forum(self,response):
         self.log("find a forum")

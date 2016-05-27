@@ -33,7 +33,6 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-COOKIES_ENABLED = True
 COOKIES_DEBUG = True
 
 # Disable Telnet Console (enabled by default)
