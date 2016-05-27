@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'MySpider.spiders'
 #USER_AGENT = 'MySpider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -69,6 +69,9 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
     'MySpider.pipelines.MyspiderPipeline': 300,
 }
+
+#禁止重定向
+REDIRECT_ENABLED = False
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
