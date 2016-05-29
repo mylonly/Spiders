@@ -31,7 +31,7 @@ class zhihuSpider(CrawlSpider):
     }
     
     def start_requests(self):
-        return [Request("https://www.zhihu.com/",meta={"cookiejar":1},callback=self.post_login)]
+        return [Request("https://www.zhihu.com/",headers = self.headers,meta={"cookiejar":1},callback=self.post_login)]
         
     def post_login(self,response):
         self.log("preparing login...")
@@ -47,6 +47,7 @@ class zhihuSpider(CrawlSpider):
                                              'email':'tianxianggen@gmail.com',
                                              'remember_me':'true',
                                           },
+                                          formxpath = "//div[@class='view view-signin']//form[@novalidate='novalidate']",
                                           callback = self.after_login,
                                           dont_filter = True)]
                                                       

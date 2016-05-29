@@ -18,5 +18,6 @@ class girlItem(scrapy.Item):
     imgSrc = scrapy.Field()
 
 class sisItem(scrapy.Item):
+    link = scrapy.Field()
     albumTitle = scrapy.Field()
-    imageUrls = scrapy.Field()
+    image_urls = scrapy.Field()

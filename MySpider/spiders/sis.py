@@ -22,8 +22,8 @@ class sisSpider(CrawlSpider):
     start_urls=["http://sexinsex.net/bbs/forum-186-1.html"]
     cookie = ""
     rules = (
-        Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),process_request='request_link',follow=True),
-        Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-1.html')),process_request='request_thread',callback='parse_thread'),
+        Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),process_request='request_form',follow=True),
+        Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-\d*.html')),process_request='request_thread'),
     )
     
     headers = {
@@ -58,20 +58,18 @@ class sisSpider(CrawlSpider):
                                              'loginsubmit':'true'
                                           },
                                           callback = self.after_login,
-                                          dont_filter = True)]
+                                          dont_filter = False)]
                                                       
     def after_login(self,response):
         for url in self.start_urls:
-            yield Request(url,headers = self.headers,meta={'cookiejar':self.cookie},dont_filter = True)
+            yield Request(url,headers = self.headers,meta={'cookiejar':self.cookie})
             
     
-    def request_link(self,request):
-        self.log("find a link %s"%request.url)
-        return Request(request.url,headers = self.headers,meta={'cookiejar':self.cookie},dont_filter=True)
+    def request_form(self,request):
+        return Request(request.url,headers = self.headers,meta={'cookiejar':self.cookie})
     
     def request_thread(self,request):
-        self.log("find a thread link %s"%request.url)
-        return Request(request.url,headers = self.headers,meta={'cookiejar':self.cookie},callback=self.parse_thread,dont_filter=True)
+        return Request(request.url,headers = self.headers,meta={'cookiejar':self.cookie},callback=self.parse_thread)
 
     def parse_thread(self,response):
         self.log("find a thread")
@@ -79,14 +77,15 @@ class sisSpider(CrawlSpider):
         title = ""
         titles = sel.xpath("//form[@name='modactions']//div[@class='mainbox viewthread']//h1/text()").extract()
         for txt in titles:
-            title = txt
+            title = txt.encode('utf-8')
             break
         self.log(title)
         item = sisItem()
+        item['link'] = response.request.url
         item['albumTitle'] = title
         imageUrls = []
         urls = sel.xpath("//div[contains(@id,'postmessage')]//img[contains(@src,'http')]/@src").extract()
         for url in urls:
             imageUrls.append(url)
-        item['imageUrls'] = imageUrls
+        item['image_urls'] = imageUrls
         return item
