@@ -65,10 +65,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-# 'MySpider.pipelines.MyspiderPipeline': 300,
-
 # ITEM_PIPELINES = {
-#     'scrapy.pipelines.images.ImagesPipeline': 1
+#     'scrapy.pipelines.images.ImagesPipeline': 1,
+#     'MySpider.pipelines.MyspiderPipeline': 300,
 # }
 
 # IMAGES_STORE = '/Users/mylonly/Pictures/zhihu'
@@ -98,5 +97,5 @@ REDIRECT_ENABLED = False
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-FEED_URI = 'file:///Users/mylonly/Mylonly/Spiders/zhihu.json'
+# FEED_URI = 'file:///Users/mylonly/Mylonly/Spiders/zhihu.json'
 FEED_FORMAT = 'json'

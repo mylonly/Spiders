@@ -20,6 +20,9 @@ class zhihuSpider(CrawlSpider):
     rules = (
         Rule(SgmlLinkExtractor(allow=('/question/\d*')),process_request="request_question"),
     )
+    custom_settings = {
+       "FEED_URI":"file:///Users/mylonly/Mylonly/Spiders/zhihu.json"
+    }
     
     headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
