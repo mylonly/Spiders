@@ -25,3 +25,6 @@ class sisItem(scrapy.Item):
     link = scrapy.Field()
     albumTitle = scrapy.Field()
     image_urls = scrapy.Field()
+    
+class legItem(scrapy.Item):
+    image_urls = scrapy.Field()
