@@ -29,9 +29,34 @@ class sisItem(scrapy.Item):
 class legItem(scrapy.Item):
     image_urls = scrapy.Field()
     
-class tbmmItem(scrapy.Item):
-    mm_userId = scrapy.Field()
-    mm_avatar = scrapy.Field()
-    mm_name = scrapy.Field()     
-    mm_usercenter = scrapy.Field()
-    mm_info = scrapy.Field()    
+class tbmodelItem(scrapy.Item):
+    avatarUrl = scrapy.Field()
+    cardUrl = scrapy.Field()
+    city = scrapy.Field()
+    height = scrapy.Field()
+    identityUrl = scrapy.Field()
+    modelUrl = scrapy.Field()
+    realName = scrapy.Field()
+    totalFanNum = scrapy.Field()
+    totalFavorNum = scrapy.Field()
+    userId = scrapy.Field()
+    viewFlag = scrapy.Field()
+    weight = scrapy.Field()
+
+    def __init__(self,dict):
+        avatarUrl = dict['avatarUrl']
+        cardUrl = dict['cardUrl']
+        city = dict['city']
+        height = dict['height']
+        identityUrl = dict['identityUrl']
+        modelUrl = dict['modelUrl']
+        realName = dict['realName']
+        totalFanNum = dict['totalFanNum']
+        totalFavorNum = dict['totalFavorNum']
+        userId = dict['userId']
+        viewFlag = dict['viewFlag']
+        weight = dict['weight']
+
+class tbThumbItem(scrapy.Item):
+    mm_thumbID = scrapy.Field()
+    image_urls = scrapy.Field()   
