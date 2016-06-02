@@ -25,3 +25,10 @@ class sisItem(scrapy.Item):
     link = scrapy.Field()
     albumTitle = scrapy.Field()
     image_urls = scrapy.Field()
+    
+class tbmmItem(scrapy.Item):
+    mm_userId = scrapy.Field()
+    mm_avatar = scrapy.Field()
+    mm_name = scrapy.Field()     
+    mm_usercenter = scrapy.Field()
+    mm_info = scrapy.Field()    
