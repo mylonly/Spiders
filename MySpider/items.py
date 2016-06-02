@@ -28,3 +28,10 @@ class sisItem(scrapy.Item):
     
 class legItem(scrapy.Item):
     image_urls = scrapy.Field()
+    
+class tbmmItem(scrapy.Item):
+    mm_userId = scrapy.Field()
+    mm_avatar = scrapy.Field()
+    mm_name = scrapy.Field()     
+    mm_usercenter = scrapy.Field()
+    mm_info = scrapy.Field()    
