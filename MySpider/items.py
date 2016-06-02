@@ -29,7 +29,7 @@ class sisItem(scrapy.Item):
 class legItem(scrapy.Item):
     image_urls = scrapy.Field()
     
-class tbmodelItem(scrapy.Item):
+class tbModelItem(scrapy.Item):
     avatarUrl = scrapy.Field()
     cardUrl = scrapy.Field()
     city = scrapy.Field()
