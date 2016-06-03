@@ -48,3 +48,12 @@ class tbThumbItem(scrapy.Item):
     thumb_userId = scrapy.Field()
     thumb_url = scrapy.Field()
     thumb_name = scrapy.Field()
+    
+class tbPhotoItem(scrapy.Item):
+    user_id = scrapy.Field()
+    albumId = scrapy.Field()
+    picId = scrapy.Field()
+    picUrl = scrapy.Field()
+    picWidth = scrapy.Field()
+    picHeight = scrapy.Field()
+    url = scrapy.Field()

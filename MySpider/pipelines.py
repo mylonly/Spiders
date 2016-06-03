@@ -49,3 +49,23 @@ class tbAlbumPipeline(object):
                 print "Mysql Error %d: %s" % (e.args[0], e.args[1])
         db.close()
         return item
+ 
+class tbPhotoPipeline(object):
+    def process_item(self,item,spider):
+        db = MySQLdb.connect("localhost","root","703003659txg","spider")
+        cursor = db.cursor()
+        db.set_character_set('utf8')
+        cursor.execute('SET NAMES utf8;')
+        cursor.execute('SET CHARACTER SET utf8;')
+        cursor.execute('SET character_set_connection=utf8;')
+        
+        sql ="INSERT INTO tb_photo(user_id,albumId,picId,picUrl,picWidth,picHeight,url)\
+                    VALUES('%s','%s','%s','%s','%s','%s','%s')"%(item['user_id'],item['albumId'],item['picId'],item['picUrl'],item['picWidth'],item['picHeight'],item['url'])
+        try:
+                print sql
+                cursor.execute(sql)
+                db.commit()
+        except MySQLdb.Error,e:
+                print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+        db.close()
+        return item
