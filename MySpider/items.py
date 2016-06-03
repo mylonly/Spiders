@@ -43,20 +43,8 @@ class tbModelItem(scrapy.Item):
     viewFlag = scrapy.Field()
     weight = scrapy.Field()
 
-    def __init__(self,dict):
-        avatarUrl = dict['avatarUrl']
-        cardUrl = dict['cardUrl']
-        city = dict['city']
-        height = dict['height']
-        identityUrl = dict['identityUrl']
-        modelUrl = dict['modelUrl']
-        realName = dict['realName']
-        totalFanNum = dict['totalFanNum']
-        totalFavorNum = dict['totalFavorNum']
-        userId = dict['userId']
-        viewFlag = dict['viewFlag']
-        weight = dict['weight']
-
 class tbThumbItem(scrapy.Item):
-    mm_thumbID = scrapy.Field()
-    image_urls = scrapy.Field()   
+    thumb_id = scrapy.Field()
+    thumb_userId = scrapy.Field()
+    thumb_url = scrapy.Field()
+    thumb_name = scrapy.Field()
