@@ -25,6 +25,12 @@ class sisSpider(CrawlSpider):
         Rule(SgmlLinkExtractor(allow=('/bbs/forum-186-\d*.html')),process_request='request_form',follow=True),
         Rule(SgmlLinkExtractor(allow=('/bbs/thread-\d*-1-\d*.html')),process_request='request_thread'),
     )
+    custom_settings = {
+       "IMAGES_STORE":"/Users/mylonly/Pictures/zhihu",
+       "ITEM_PIPELINES":{
+         'scrapy.pipelines.images.ImagesPipeline': 1,
+       }
+    }
     
     headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",

@@ -21,7 +21,10 @@ class zhihuSpider(CrawlSpider):
         Rule(SgmlLinkExtractor(allow=('/question/\d*')),process_request="request_question"),
     )
     custom_settings = {
-       "FEED_URI":"file:///Users/mylonly/Mylonly/Spiders/zhihu.json"
+       "IMAGES_STORE":"/Users/mylonly/Pictures/zhihu",
+       "ITEM_PIPELINES":{
+         'scrapy.pipelines.images.ImagesPipeline': 1,
+       }
     }
     
     headers = {
