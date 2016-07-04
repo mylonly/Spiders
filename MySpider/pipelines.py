@@ -10,7 +10,7 @@ import MySQLdb
 
 class tbModelPipeline(object):
     def process_item(self,item,spider):
-        db = MySQLdb.connect("localhost","root","703003659txg","spider")
+        db = MySQLdb.connect("localhost","root","*******","spider")
         cursor = db.cursor()
         db.set_character_set('utf8')
         cursor.execute('SET NAMES utf8;')
@@ -32,7 +32,7 @@ class tbModelPipeline(object):
         
 class tbAlbumPipeline(object):
     def process_item(self,item,spider):
-        db = MySQLdb.connect("localhost","root","703003659txg","spider")
+        db = MySQLdb.connect("localhost","root","*******","spider")
         cursor = db.cursor()
         db.set_character_set('utf8')
         cursor.execute('SET NAMES utf8;')
@@ -52,7 +52,7 @@ class tbAlbumPipeline(object):
  
 class tbPhotoPipeline(object):
     def process_item(self,item,spider):
-        db = MySQLdb.connect("localhost","root","703003659txg","spider")
+        db = MySQLdb.connect("localhost","root","*******","spider")
         cursor = db.cursor()
         db.set_character_set('utf8')
         cursor.execute('SET NAMES utf8;')

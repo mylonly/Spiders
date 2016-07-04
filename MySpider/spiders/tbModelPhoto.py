@@ -35,7 +35,7 @@ class tbModelPhoto(Spider):
     }
     
     def start_requests(self):
-        db = MySQLdb.connect("localhost","root","703003659txg","spider")
+        db = MySQLdb.connect("localhost","root","*******","spider")
         cursor = db.cursor()
         sql ="select album_user_id,album_id from tb_album"
         count = cursor.execute(sql)

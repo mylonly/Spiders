@@ -36,7 +36,7 @@ class tbModelAlbum(Spider):
     }
     
     def start_requests(self):
-        db = MySQLdb.connect("localhost","root","703003659txg","spider")
+        db = MySQLdb.connect("localhost","root","*******","spider")
         cursor = db.cursor()
         sql ="select user_id from tb_model"
         count = cursor.execute(sql)
