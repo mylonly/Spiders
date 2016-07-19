@@ -57,3 +57,7 @@ class tbPhotoItem(scrapy.Item):
     picWidth = scrapy.Field()
     picHeight = scrapy.Field()
     url = scrapy.Field()
+
+class contactItem(scrapy.Item):
+    username = scrapy.Field()
+    password = scrapy.Field()

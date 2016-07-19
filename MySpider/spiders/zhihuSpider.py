@@ -16,7 +16,7 @@ from scrapy.utils.response import open_in_browser
 class zhihuSpider(CrawlSpider):
     name = "zhihu"
     allow_domians = ["zhihu.com"]
-    start_urls = ["https://www.zhihu.com/collection/38624707"]
+    start_urls = ["https://www.zhihu.com/collection/59030658"]
     rules = (
         Rule(SgmlLinkExtractor(allow=('/question/\d*')),process_request="request_question"),
     )

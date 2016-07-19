@@ -69,3 +69,10 @@ class tbPhotoPipeline(object):
                 print "Mysql Error %d: %s" % (e.args[0], e.args[1])
         db.close()
         return item
+
+class contactPipeline(object):
+    def process_item(self,item,spider):
+        f = file("username.txt","a+")
+        username = item['username']
+        f.writelines(username+'\r\n')
+        return item
